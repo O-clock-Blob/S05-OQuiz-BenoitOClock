@@ -1,0 +1,14 @@
+Réponse: code réponse, réponse
+valider, 11 Question, 11 Réponse
+Catégorie: code catégorie, nom
+appartenir, 0N Quizz, 0N Catégorie
+
+proposer, 1N Question, 11 Réponse
+Question: code question, question, description
+composer, 11 Question, 1N Quizz
+Quizz: code quizz, titre, thème, contexte
+
+Difficulté: code difficulté, label
+définir, 11 Question, 0N Difficulté
+Utilisateur: code utilisateur, prénom, nom, email, mot de passe
+créer, 0N Utilisateur, 11 Quizz
