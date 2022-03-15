@@ -1,5 +1,7 @@
 # Conception
 
+Quand on modélise une base de données, il est important de conserver l'atomicité des propriétés (en gros une case ne contient qu'une seule valeur). Dans notre cas par exemple, il est préférable de modéliser la relation entre les questions et les réponses associées en liant chaque réponse à une question plutot qu'en liant une question à plusieurs réponses.
+
 ## Cas d'utilisation
 
 Les cas d'utilisation correspondent à l'ensemble des actions réalisées par une application en interaction avec ses utilisateurs pour arriver à un objectif donné.
