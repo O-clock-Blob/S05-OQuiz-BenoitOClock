@@ -1,0 +1,7 @@
+level( id, name )
+question( id, question, description, #level(id), #quiz(id), #answer(id) )
+answer( id, answer, #question(id) )
+user( id, first_name, last_name, email, password )
+quizz( id, title, subjet, description, #user(id) )
+tag( id, name )
+quizz_tag (#quiz(id), #tag(id))
