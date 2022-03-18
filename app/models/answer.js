@@ -3,6 +3,8 @@ const CoreModel = require("./coreModel");
 class Answer extends CoreModel{
     description;
     question_id;
+
+    static tableName = "answer";
   
     constructor(obj) {
       super(obj);

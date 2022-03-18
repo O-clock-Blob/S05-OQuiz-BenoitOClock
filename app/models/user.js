@@ -6,11 +6,15 @@ class User extends CoreModel {
   firstname;
   lastname;
 
+  static tableName = "user";
+
   constructor(obj) {
     super(obj);
 
+    console.log(obj.email)
+
     if (typeof obj.email !== "string") {
-      throw new Error("USer.email must be a string");
+      throw new Error("User.email must be a string");
     }
     this.email = obj.email;
 
@@ -33,6 +37,7 @@ class User extends CoreModel {
   get fullname() {
     return this.firstname + " " + this.lastname;
   }
+
 }
 
 module.exports = User;

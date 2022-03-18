@@ -5,6 +5,8 @@ class Quiz extends CoreModel {
   description;
   user_id;
 
+  static tableName = "quiz";
+
   constructor(obj) {
     super(obj);
     if (typeof obj.title !== "string") {
