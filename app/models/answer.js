@@ -1,23 +1,19 @@
-const CoreModel = require("./coreModel");
+const sequelize = require("../database");
+const { Model, DataTypes } = require("sequelize");
 
-class Answer extends CoreModel{
-    description;
-    question_id;
+class Answer extends Model {}
 
-    static tableName = "answer";
-  
-    constructor(obj) {
-      super(obj);
-      if(typeof obj.description !== "string"){
-        throw new Error('Answer.description must be a string');
-      }
-      this.description = obj.description;
-      
-      if(isNaN(parseInt(obj.question_id, 10))){
-        throw new Error('Answer.question_id must be an integer');
-      }
-      this.question_id = obj.question_id;
-    }
+Answer.init(
+  {
+    description: {
+      type: DataTypes.STRING,
+      allowNull: false,
+    },
+  },
+  {
+    sequelize,
+    tableName: "answer"
   }
-  
-  module.exports = Answer;
+);
+
+module.exports = Answer;

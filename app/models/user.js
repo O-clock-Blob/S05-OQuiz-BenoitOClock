@@ -1,43 +1,32 @@
-const CoreModel = require("./coreModel");
+const sequelize = require("../database");
+const { Model, DataTypes } = require("sequelize");
 
-class User extends CoreModel {
-  email;
-  password;
-  firstname;
-  lastname;
+class User extends Model {}
 
-  static tableName = "user";
-
-  constructor(obj) {
-    super(obj);
-
-    console.log(obj.email)
-
-    if (typeof obj.email !== "string") {
-      throw new Error("User.email must be a string");
+User.init(
+  {
+    email: {
+      type: DataTypes.STRING,
+      allowNull: false,
+      validate:{
+        isEmail: true
+      }
+    },
+    password:{
+      type:DataTypes.STRING,
+      allowNull: false
+    },
+    firstname: {
+      type: DataTypes.STRING
+    },
+    lastname: {
+      type: DataTypes.STRING
     }
-    this.email = obj.email;
-
-    if (typeof obj.password !== "string") {
-      throw new Error("User.password must be a string");
-    }
-    this.password = obj.password;
-
-    if (typeof obj.firstname !== "string") {
-      throw new Error("User.firstname must be a string");
-    }
-    this.firstname = obj.firstname;
-
-    if (typeof obj.lastname !== "string") {
-      throw new Error("User.lastname must be a string");
-    }
-    this.lastname = obj.lastname;
+  },
+  {
+    sequelize,
+    tableName: "user"
   }
-
-  get fullname() {
-    return this.firstname + " " + this.lastname;
-  }
-
-}
+);
 
 module.exports = User;

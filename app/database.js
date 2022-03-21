@@ -1,11 +1,19 @@
-// on récupére le module pg
-const { Client } = require('pg');
+const { Sequelize } = require("sequelize");
 
-// on crée une instance de la classe Client en lui passant l'url de connexion
-const client = new Client(process.env.PG_URL);
+const sequelize = new Sequelize(process.env.DB_URL, {
+  define: {
+    updatedAt: "updated_at",
+    createdAt: "created_at"
+  }
+});
 
-// on connect l'instance du client à la base de données
-client.connect();
+(async () => {
+  try {
+    await sequelize.authenticate();
+    console.log("Connection has been established successfully.");
+  } catch (error) {
+    console.error("Unable to connect to the database:", error);
+  }
+})();
 
-// on export le client
-module.exports = client;
+module.exports = sequelize;

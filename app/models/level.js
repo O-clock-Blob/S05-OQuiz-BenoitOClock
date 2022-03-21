@@ -1,17 +1,19 @@
-const CoreModel = require("./coreModel");
+const sequelize = require("../database");
+const { Model, DataTypes } = require("sequelize");
 
-class Level extends CoreModel {
-  name;
+class Level extends Model {}
 
-  static tableName = "level";
-
-  constructor(obj) {
-    super(obj);
-    if (typeof obj.name !== "string") {
-      throw new Error("Level.name mist be a string");
-    }
-    this.name = obj.name;
+Level.init(
+  {
+    name: {
+      type: DataTypes.STRING,
+      allowNull: false,
+    },
+  },
+  {
+    sequelize,
+    tableName: "level"
   }
-}
+);
 
 module.exports = Level;

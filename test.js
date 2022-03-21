@@ -1,12 +1,25 @@
-const dotenv = require("dotenv");
-dotenv.config();
+require("dotenv").config();
 
-const dataMapper = require("./app/dataMapper");
-const Level = require("./app/models/level");
-const User = require("./app/models/user");
-const Tag = require("./app/models/tag");
-const Question = require("./app/models/question");
-const Quiz = require("./app/models/quiz");
+const { Answer, Level, Question, Quiz, User, Tag } = require("./app/models");
+
+/*
+User.findAll().then(users=>{
+    console.log(users)
+},(err)=>{
+    console.log(err)
+})
+*/
+
+User.findByPk(4).then(user=>console.log(user))
+
+
+
+// const dataMapper = require("./app/dataMapper");
+// const Level = require("./app/models/level");
+// const User = require("./app/models/user");
+// const Tag = require("./app/models/tag");
+// const Question = require("./app/models/question");
+// const Quiz = require("./app/models/quiz");
 
 // User.findById(4, (err, user)=>{
 //     user.email = "nibelune@gmail.com";
@@ -15,16 +28,15 @@ const Quiz = require("./app/models/quiz");
 //     });
 // });
 
-const newUser = new User({
-    email:"bob@jamaica.org",
-    password: "sdfsdfs",
-    firstname:"Bob",
-    lastname: "Marley"
-});
-newUser.save((err,user)=>{
-    console.log(user)
-})
-
+// const newUser = new User({
+//     email:"bob@jamaica.org",
+//     password: "sdfsdfs",
+//     firstname:"Bob",
+//     lastname: "Marley"
+// });
+// newUser.save((err,user)=>{
+//     console.log(user)
+// })
 
 // Quiz.findBy({user_id:1, title:"Linux - I"},(err,results)=>{
 //     if(err){
@@ -66,7 +78,6 @@ veryHardLevel.insert((err, level)=> {
 // })
 
 // User.findBy({email:"nib@free.fr"},(err,user)=>{})
-
 
 // Tag.findById(16,(err,tag)=>{
 //     console.log(tag);
@@ -147,4 +158,3 @@ User.findAll((err,users)=>{
 
 })
 */
-
