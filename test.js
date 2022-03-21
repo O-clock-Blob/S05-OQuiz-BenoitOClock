@@ -6,10 +6,66 @@ const Level = require("./app/models/level");
 const User = require("./app/models/user");
 const Tag = require("./app/models/tag");
 const Question = require("./app/models/question");
+const Quiz = require("./app/models/quiz");
 
-User.findAll((err,users)=>{
-    console.log(users)
+// User.findById(4, (err, user)=>{
+//     user.email = "nibelune@gmail.com";
+//     user.save((err, user)=>{
+//         console.log(user)
+//     });
+// });
+
+const newUser = new User({
+    email:"bob@jamaica.org",
+    password: "sdfsdfs",
+    firstname:"Bob",
+    lastname: "Marley"
+});
+newUser.save((err,user)=>{
+    console.log(user)
 })
+
+
+// Quiz.findBy({user_id:1, title:"Linux - I"},(err,results)=>{
+//     if(err){
+//         console.log(err)
+//     } else {
+//         console.log(results)
+//     }
+// })
+
+/*
+User.findAll((err, users)=>{
+    if(err){
+        console.log(err)
+    } else {
+        console.log(users)
+    }
+})
+
+Question.findById(3,(err, question)=>{
+    if(err){
+        console.log(err)
+    } else {
+        console.log(question)
+    }
+})
+
+const veryHardLevel = new Level({name:"Très difficile"});
+veryHardLevel.insert((err, level)=> {
+    if(err){
+        console.log(err)
+    } else {
+        console.log(level)
+    }
+})
+
+*/
+// User.findAll((err,users)=>{
+//     console.log(users)
+// })
+
+// User.findBy({email:"nib@free.fr"},(err,user)=>{})
 
 
 // Tag.findById(16,(err,tag)=>{

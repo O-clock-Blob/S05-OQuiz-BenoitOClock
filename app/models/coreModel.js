@@ -74,6 +74,45 @@ class CoreModel {
     }
   }
 
+  static findBy(obj, callback){
+
+    const conditions = [];
+    const values = [];
+    let placeHoldersIndex = 1;
+    for(let property in obj){
+      // "email=$1"
+      conditions.push(`"${property}"=$${placeHoldersIndex}`);
+      values.push(obj[property])
+      placeHoldersIndex++
+    }
+
+    const query ={
+      text: `SELECT * FROM "${this.tableName}"
+      WHERE ${conditions.join(" AND ")}`,
+      values
+    }
+
+    console.log(query.text)
+
+    client.query(query,(err, results)=>{
+      // cas 1: une erreur est survenue => lon la passe à la fonction
+      // callback
+      if (err) {
+        return callback(err, null);
+      }
+      if(!results.rowCount){
+        return callback(null, []);
+      }
+      const items = [];
+      for(const result of results.rows){
+        console.log(result)
+        items.push(new this(result))
+      }
+      callback(null, items)
+    })
+
+  }
+
   insert(callback) {
     // On souhaite insérer n'importe quelle instance d'un modele dans notre db
     // mais nos différents modéles n'ont pas les mêmes prorpriétés (champs).
@@ -120,17 +159,27 @@ class CoreModel {
   }
 
   update(callback) {
+    // on crée un tableau contenant les clefs des propriété de l'objet
+    // que l'on va mettre à jour
     const properties = Object.keys(this);
+    //par exemple pour une instance de User je récupére un tableau
+    // ["email","password","firstname","lastname"]
 
     const sets = [];
     const values = [];
     let placeHoldersIndex = 1;
 
     for (const property of properties) {
-      sets.push(`"${property}"=$${placeHoldersIndex}`);
+      //"email"=$1, "password=$2..."
+      sets.push(`"${property}"=$${placeHoldersIndex}`); 
+      // nibelune@gmail.com, lkzjgflksjghdk, ...
+      // this[property] permet d'accéder dynamiquement aux valeurs des propriétés de this
+      // par exmeple si property contient la chaine "email" this[property] permettra d'accéder à this["email"]
+      // qui est la même chose de this.email
       values.push(this[property]);
       placeHoldersIndex++;
     }
+
     values.push(this.id)
 
     const query = {
@@ -142,10 +191,6 @@ class CoreModel {
       `,
       values
     };
-
-    console.log(query.text)
-    console.log(values)
-
 
     client.query(query, (err, result) => {
       // cas 1 : une erreyr est survenue
@@ -177,6 +222,17 @@ class CoreModel {
       }
       callback(null, true);
     });
+  }
+
+  save(callback){
+    // pour vérfier qu'une instance existe déjà en base, il suffit de vérifier
+    // si cette dernière à déjà un id.
+    // si elle n'en a pas, il faut utiliser insert, sinon update
+    if(this.id){
+      return this.update(callback)
+    } else {
+      return this.insert(callback)
+    }
   }
 }
 
