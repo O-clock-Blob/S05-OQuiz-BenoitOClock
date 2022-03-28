@@ -1,31 +1,43 @@
 const sequelize = require("../database");
 const { Model, DataTypes } = require("sequelize");
 
-class User extends Model {}
+class User extends Model {
+  get fullname() {
+    return this.firstname + " " + this.lastname;
+  }
+}
 
 User.init(
   {
     email: {
       type: DataTypes.STRING,
       allowNull: false,
-      validate:{
-        isEmail: true
-      }
+      validate: {
+        isEmail: true,
+      },
     },
-    password:{
-      type:DataTypes.STRING,
-      allowNull: false
+    password: {
+      type: DataTypes.STRING,
+      allowNull: false,
     },
     firstname: {
-      type: DataTypes.STRING
+      type: DataTypes.STRING,
     },
     lastname: {
-      type: DataTypes.STRING
-    }
+      type: DataTypes.STRING,
+    },
+    role: {
+      type: DataTypes.STRING,
+      allowNull: false,
+      defaultValue: "user",
+      validate: {
+        notEmpty: true,
+      },
+    },
   },
   {
     sequelize,
-    tableName: "user"
+    tableName: "user",
   }
 );
 

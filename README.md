@@ -1,5 +1,20 @@
 # OQuiz
 
+## Jour 7
+
+Créer les pages manquantes :
+- admin
+- profil
+- 401 (Balrog)
+
+Créer les controlleurs et les méthodes manquantes : 
+- userController.disconnect
+- userController.profilPage
+- adminController.adminPage
+
+Créer un middleware adminMiddleware qui redirige l'utilisateur vers la page '401' quand il accéde à une page protégée
+
+
 ## Jour 2 : Active Record factorisé
 
 Les méthodes Active Record sont maintenant factorisé directement dans CoreModel !!
