@@ -6,7 +6,6 @@ const tagController = {
       const tags = await Tag.findAll({
         order: [["name", "ASC"]],
       });
-      console.log(tags)
       res.render("tags", { tags });
     } catch (err) {
       console.log(err);

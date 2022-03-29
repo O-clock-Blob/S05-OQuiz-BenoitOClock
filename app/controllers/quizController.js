@@ -10,7 +10,6 @@ const quizController = {
         { association: "tags" },
       ],
     }).then((quiz) => {
-      console.log(quiz);
       res.render("quiz", { quiz });
     });
   },

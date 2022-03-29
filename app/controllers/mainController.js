@@ -4,7 +4,6 @@ const mainController = {
   homePage(req, res) {
     Quiz.findAll({ order: [["title", "ASC"]], include: "author" }).then(
       (quizzes) => {
-        console.log(quizzes);
         res.render("home", { quizzes });
       },
       (error) => {

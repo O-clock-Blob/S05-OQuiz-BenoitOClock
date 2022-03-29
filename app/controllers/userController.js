@@ -63,11 +63,23 @@ const userController = {
       if (!validPassword) {
         return res.render("login", { error: "Mot de passe incorrect" });
       }
+
       req.session.user = user;
+
       // on supprime le mot de passe de cet objet
       delete req.session.user.password;
       res.redirect("/");
     });
+  },
+  profilePage: (req, res) => {
+    if (!req.session.user) {
+      return res.redirect("/login");
+    }
+    res.render("profile");
+  },
+  disconnect: (req, res) => {
+    req.session.user = false;
+    res.redirect("/");
   },
 };
 
